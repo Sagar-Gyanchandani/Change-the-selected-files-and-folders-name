@@ -1,0 +1,45 @@
+# In this we change change the folder name with capitalize their first character but if there any exception that folder name that yo don't want to change than please the folder name in text file as I done in sagar.txt file
+# In this we also change the file name of a particular extension like as I in this with .jpg files
+
+
+
+
+import os
+def soldier(path, file, lst):
+    os.chdir(path)
+    changename(lst)
+    getdirlist(path)
+    
+def getdirlist(path):
+    
+    f = open("sagar.txt", "r")
+    content = f.read()
+    exception_list = content.split("\n") 
+
+    for dir in os.listdir(path):
+        if os.path.isdir(os.path.join(path, dir)):
+            if dir not in exception_list:
+                os.rename(dir, dir.capitalize())
+                
+    
+def changename(lst):
+    i=1
+    for file in lst: 
+        f_name, f_ext = file.split(".")
+        os.rename(f_name+'.'+f_ext, str(i) + '.'+f_ext)
+        i = i + 1
+
+def getlist():
+    act_lst = []
+    lst = os.listdir()
+    for file in lst:
+        if file.endswith(".JPG"):
+            act_lst.append(file)
+    return act_lst
+
+    
+path = "C:/Users/sagar/Desktop/exp1"
+lst = getlist()
+
+
+soldier(path,"sagar.txt" ,lst)
